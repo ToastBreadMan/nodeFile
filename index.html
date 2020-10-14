@@ -1,18 +1,22 @@
 <htmnl>
     <title>Downloader</title>
     <div>
+        <h1>Upload</h1>
         <form method="POST" action="/upload" enctype="multipart/form-data">
         <input name="foo" type="file" id="fileupload">
         <button onClick="reload()" type="submit" id="uploadbutton">Upload</button>
     </form>
     </div>
+    <h1>download</h1>
     <input type="text" id="inputBox">
     <button id="downloadButton">Download(pls)</button>
+    <ul id="unor">
     <script>
         var inputBox = document.getElementById("inputBox")
         var download = document.getElementById("downloadButton")
         var uploadboc = document.getElementById("fileupload")
         var uploudbutton = document.getElementById("uploadbutton")
+        var unor = document.getElementById("unor")
         download.addEventListener("click", () => {
             var input = inputBox.value
             console.log(input)
@@ -30,6 +34,19 @@
             window.open("/download")
 
         })
+
+        fetch("/all").then(
+            response => response.json().then((data) => {
+                var fileData = data.fileData
+                for(file in fileData){
+                    var li = document.createElement("li")
+                    var app = data.fileData[file]
+                    li.innerHTML = app
+                    unor.appendChild(li)
+                   // unor.append(file+1,".",app,)
+                }
+            })
+        )
 
             function reload(){
                 location.reload()
