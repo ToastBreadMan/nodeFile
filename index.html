@@ -1,0 +1,38 @@
+<htmnl>
+    <title>Downloader</title>
+    <div>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input name="foo" type="file" id="fileupload">
+        <button onClick="reload()" type="submit" id="uploadbutton">Upload</button>
+    </form>
+    </div>
+    <input type="text" id="inputBox">
+    <button id="downloadButton">Download(pls)</button>
+    <script>
+        var inputBox = document.getElementById("inputBox")
+        var download = document.getElementById("downloadButton")
+        var uploadboc = document.getElementById("fileupload")
+        var uploudbutton = document.getElementById("uploadbutton")
+        download.addEventListener("click", () => {
+            var input = inputBox.value
+            console.log(input)
+            const opt = {
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({
+                    input
+                })
+            }
+            fetch("/name",opt)
+
+            window.open("/download")
+
+        })
+
+            function reload(){
+                location.reload()
+            }
+    </script>
+</htmnl>
